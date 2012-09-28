@@ -42,3 +42,8 @@ See all available commands:
 ## Note
 
 Depending on your erlang cookie, you may have to use the commands with `sudo`.
+
+## Authors
+
+* [Erick Dennis](https://github.com/edennis)
+* [Sebastian Röbke](https://github.com/boosty)
