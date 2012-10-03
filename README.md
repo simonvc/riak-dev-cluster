@@ -11,7 +11,15 @@ Easily run a 3-node [Riak](http://wiki.basho.com/Riak.html) cluster on OS X.
 
 ## Getting started
 
-There is a bootstrap script available that installs, starts and joins the riak cluster in one go:
+Clone the repository:
+
+    $ git clone git://github.com/xing/riak-dev-cluster.git
+
+Go to the riak-dev-cluster directory:
+
+    $ cd riak-dev-cluster
+
+There is a bootstrap command available that installs, starts and joins the riak cluster in one go:
 
     $ rake bootstrap
 
