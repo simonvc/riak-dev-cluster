@@ -1,5 +1,6 @@
 RIAK_VERSION      = "1.2.0"
 RIAK_DOWNLOAD_URL = "http://s3.amazonaws.com/downloads.basho.com/riak/#{RIAK_VERSION[0..2]}/#{RIAK_VERSION}/osx/10.4/riak-#{RIAK_VERSION}-osx-x86_64.tar.gz"
+RIAKNOSTIC_DOWNLOAD_URL = "https://github.com/downloads/basho/riaknostic/riaknostic-LATEST.tar.gz"
 
 task :default => :help
 
@@ -53,6 +54,9 @@ end
 desc "install riak"
 task :install => [:fetch_riak, :copy_riak]
 
+desc "install riaknostic"
+task :install_riaknostic => [:fetch_riaknostic, :copy_riaknostic]
+
 desc "ping all riak nodes"
 task :ping do
   (1..3).each do |n|
@@ -61,11 +65,22 @@ task :ping do
 end
 
 task :fetch_riak do
-  sh "curl #{RIAK_DOWNLOAD_URL} | tar xz -" unless File.exist? "riak-#{RIAK_VERSION}"
+  sh "curl -L #{RIAK_DOWNLOAD_URL} | tar xz -" unless File.exist? "riak-#{RIAK_VERSION}"
+end
+
+task :fetch_riaknostic do
+  sh "curl -L -k #{RIAKNOSTIC_DOWNLOAD_URL} > riaknostic-LATEST.tar.gz"
+  sh "tar xf riaknostic-LATEST.tar.gz" unless File.exist? "riaknostic"
 end
 
 task :copy_riak do
   (1..3).each do |n|
     system %{cp -nr riak-#{RIAK_VERSION}/ riak#{n}}
+  end
+end
+
+task :copy_riaknostic do
+  (1..3).each do |n|
+    system %{cp -nr riaknostic/ riak#{n}/lib/}
   end
 end
