@@ -81,6 +81,6 @@ end
 
 task :copy_riaknostic do
   (1..3).each do |n|
-    system %{cp -nr riaknostic/ riak#{n}/lib/}
+    system %{cp -nr riaknostic riak#{n}/lib/}
   end
 end
