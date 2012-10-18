@@ -1,6 +1,7 @@
 RIAK_VERSION      = "1.2.0"
 RIAK_DOWNLOAD_URL = "http://s3.amazonaws.com/downloads.basho.com/riak/#{RIAK_VERSION[0..2]}/#{RIAK_VERSION}/osx/10.4/riak-#{RIAK_VERSION}-osx-x86_64.tar.gz"
 RIAKNOSTIC_DOWNLOAD_URL = "https://github.com/downloads/basho/riaknostic/riaknostic-LATEST.tar.gz"
+NUM_NODES = 5
 
 task :default => :help
 
@@ -13,7 +14,7 @@ task :bootstrap => [:install, :start, :join]
 
 desc "start all riak nodes"
 task :start do
-  (1..3).each do |n|
+  (1..NUM_NODES).each do |n|
     sh %{ulimit -n 2048; ./riak#{n}/bin/riak start}
   end
   puts "======================================="
@@ -27,7 +28,7 @@ end
 
 desc "stop all riak nodes"
 task :stop do
-  (1..3).each do |n|
+  (1..NUM_NODES).each do |n|
     sh %{ulimit -n 2048; ./riak#{n}/bin/riak stop} rescue "not running"
   end
 end
@@ -37,14 +38,14 @@ task :restart => [:stop, :start]
 
 desc "join riak nodes (only needed once)"
 task :join do
-  (2..3).each do |n|
+  (2..NUM_NODES).each do |n|
     sh %{./riak#{n}/bin/riak-admin join -f riak1@127.0.0.1} rescue "already joined"
   end
 end
 
 desc "clear data from all riak nodes, restart and join"
 task :clear => :stop do
-  (1..3).each do |n|
+  (1..NUM_NODES).each do |n|
     sh %{rm -rf riak#{n}}
     sh %{git checkout riak#{n}}
   end
@@ -59,7 +60,7 @@ task :install_riaknostic => [:fetch_riaknostic, :copy_riaknostic]
 
 desc "ping all riak nodes"
 task :ping do
-  (1..3).each do |n|
+  (1..NUM_NODES).each do |n|
     sh %{riak#{n}/bin/riak ping}
   end
 end
@@ -74,13 +75,13 @@ task :fetch_riaknostic do
 end
 
 task :copy_riak do
-  (1..3).each do |n|
+  (1..NUM_NODES).each do |n|
     system %{cp -nr riak-#{RIAK_VERSION}/ riak#{n}}
   end
 end
 
 task :copy_riaknostic do
-  (1..3).each do |n|
+  (1..NUM_NODES).each do |n|
     system %{cp -nr riaknostic riak#{n}/lib/}
   end
 end
