@@ -20,9 +20,7 @@ task :start do
   puts
   puts "HTTP API: http://127.0.0.1:11098"
   puts
-  puts "Admin UI: https://127.0.0.1:11088/admin"
-  puts "User:     admin"
-  puts "Password: admin"
+  puts "Admin UI: https://127.0.0.1:11098/admin"
   puts "======================================="
 end
 
