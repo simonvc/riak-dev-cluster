@@ -1,5 +1,6 @@
-RIAK_VERSION      = "1.2.0"
-RIAK_DOWNLOAD_URL = "http://s3.amazonaws.com/downloads.basho.com/riak/#{RIAK_VERSION[0..2]}/#{RIAK_VERSION}/osx/10.4/riak-#{RIAK_VERSION}-osx-x86_64.tar.gz"
+RIAK_VERSION      = "1.3.0"
+RIAK_DOWNLOAD_URL = "http://s3.amazonaws.com/downloads.basho.com/riak/#{RIAK_VERSION[0..2]}/#{RIAK_VERSION}/osx/10.6/riak-#{RIAK_VERSION}-osx-x86_64.tar.gz"
+#http://s3.amazonaws.com/downloads.basho.com/riak/1.3/1.3.0/osx/10.6/riak-1.3.0-osx-x86_64.tar.gz
 RIAKNOSTIC_DOWNLOAD_URL = "https://github.com/downloads/basho/riaknostic/riaknostic-LATEST.tar.gz"
 NUM_NODES = 5
 
@@ -15,7 +16,7 @@ task :bootstrap => [:install, :start, :join]
 desc "start all riak nodes"
 task :start do
   (1..NUM_NODES).each do |n|
-    sh %{ulimit -n 2048; ./riak#{n}/bin/riak start}
+    sh %{ulimit -n 4096; ./riak#{n}/bin/riak start}
   end
   puts "======================================="
   puts "Riak Dev Cluster started"
@@ -29,7 +30,7 @@ end
 desc "stop all riak nodes"
 task :stop do
   (1..NUM_NODES).each do |n|
-    sh %{ulimit -n 2048; ./riak#{n}/bin/riak stop} rescue "not running"
+    sh %{ulimit -n 4096; ./riak#{n}/bin/riak stop} rescue "not running"
   end
 end
 
