@@ -1,4 +1,4 @@
-RIAK_VERSION      = "1.3.0"
+RIAK_VERSION      = "1.3.1"
 RIAK_DOWNLOAD_URL = "http://s3.amazonaws.com/downloads.basho.com/riak/#{RIAK_VERSION[0..2]}/#{RIAK_VERSION}/osx/10.6/riak-#{RIAK_VERSION}-osx-x86_64.tar.gz"
 #http://s3.amazonaws.com/downloads.basho.com/riak/1.3/1.3.0/osx/10.6/riak-1.3.0-osx-x86_64.tar.gz
 RIAKNOSTIC_DOWNLOAD_URL = "https://github.com/downloads/basho/riaknostic/riaknostic-LATEST.tar.gz"
