@@ -13,7 +13,7 @@ Easily run a 5-node [Riak](http://wiki.basho.com/Riak.html) cluster on OS X.
 
 Clone the repository:
 
-    $ git clone git://github.com/simonvc/riak-dev-cluster.git
+    $ git clone git://github.com/cheeseplus/riak-dev-cluster.git
 
 Go to the riak-dev-cluster directory:
 
@@ -61,3 +61,4 @@ Depending on your erlang cookie, you may have to use the commands with `sudo`.
 
 Updates by:
 * [Simon Vans-Colina](https://github.com/simonvc)
+* [Seth Thomas](https://github.com/cheeseplus)
