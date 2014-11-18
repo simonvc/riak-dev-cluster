@@ -114,6 +114,7 @@ desc "riak-admin ring-status"
     system %(sed -i '' 's/riak@127.0.0.1/riak#{n}@127.0.0.1/' riak#{n}/etc/riak.conf)
     system %(sed -i '' 's/127.0.0.1:8098/127.0.0.1:1#{n}098/' riak#{n}/etc/riak.conf)
     system %(sed -i '' 's/127.0.0.1:8087/127.0.0.1:1#{n}087/' riak#{n}/etc/riak.conf)
+    system %(echo 'riak_control = on' >> riak#{n}/etc/riak.conf)
     system %(echo 'handoff.port = 1#{n}099' >> riak#{n}/etc/riak.conf)
     system %(echo 'ring_size = #{RING_SIZE}' >> riak#{n}/etc/riak.conf)
    end
