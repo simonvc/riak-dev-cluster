@@ -43,9 +43,6 @@ Clear all data and restart the cluster:
 
     $ rake clear
 
-You can also install riaknostic (the riak-admin diag command):
-    $ rake install_riaknostic
-
 ## Other commands
 
 See all available commands:
