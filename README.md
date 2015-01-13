@@ -1,58 +1,109 @@
-# Riak Dev Cluster for OS X
+Riak Dev Cluster for OS X
+=========================
 
-Easily run a 5-node [Riak](http://wiki.basho.com/Riak.html) cluster on OS X.
+Easily run a 5-node [Riak](http://wiki.basho.com/Riak.html) cluster on
+OS X.
 
 * The names of the nodes are riak[1-5]@127.0.0.1
 * The HTTP port of riak1 is 11098: <http://127.0.0.1:11098>
-* Riak Control (Admin UI) is available here: <https://admin:admin@127.0.0.1:11098/admin> 
-* All nodes use the [eleveldb](http://wiki.basho.com/LevelDB.html) storage backend
-  to support [secondary indexes](http://wiki.basho.com/Secondary-Indexes.html)
-* Please see riak[1-5]/etc/app.config for the other ports and settings
+* Riak Control (Admin UI) is available
+    [here](https://admin:admin@127.0.0.1:11098/admin)
+* All nodes use the
+    [LevelDB](http://docs.basho.com/riak/latest/ops/advanced/backends/leveldb/)
+    storage backend [Riak
+* Search](http://docs.basho.com/riak/latest/dev/using/search/) is
+    disabled (default)
+* Please see the `/etc/riak.conf` in each node's directory for the other
+    ports and settings
 
 ## Getting started
 
-Clone the repository:
+Ensure that [Open File
+Limits](http://docs.basho.com/riak/latest/ops/tuning/open-files-limit/#Mac-OS-X)
+are set
 
-    $ git clone git://github.com/simonvc/riak-dev-cluster.git
+Clone and navigate to the repository:
 
-Go to the riak-dev-cluster directory:
+```
+$ git clone git://github.com/basho/riak-dev-cluster.git
+$ cd riak-dev-cluster
+```
 
-    $ cd riak-dev-cluster
+There is a `bootstrap` command available that installs, starts, and
+joins the Riak cluster in one go:
 
-There is a bootstrap command available that installs, starts and joins the riak cluster in one go:
-
-    $ rake bootstrap
+```
+rake bootstrap
+```
 
 ## Control commands
 
 Start all nodes:
 
-    $ rake start
+```
+rake start
+```
 
 Join all nodes as a cluster (only needed once):
 
-    $ rake join
+```
+rake join
+```
 
 Stop all nodes:
 
-    $ rake stop
+```
+rake stop
+```
 
 Clear all data and restart the cluster:
 
-    $ rake clear
+```
+rake clear
+```
 
-You can also install riaknostic (the riak-admin diag command):
-    $ rake install_riaknostic
+Restart all nodes without clearing all data:
+
+```
+rake restart
+```
+
+## Riak Data Types
+
+There are a few `rake` commands that will set up your cluster to use
+[Riak Data
+Types](http://docs.basho.com/riak/2.0.0/dev/using/data-types/). You can
+create a [bucket
+type](http://docs.basho.com/riak/2.0.2/dev/advanced/bucket-types/) for
+using [Riak
+counters](http://docs.basho.com/riak/2.0.2/dev/using/data-types/#Counters)
+called `counters`:
+
+```
+rake counter_bucket
+```
+
+You can do the same for sets:
+
+```
+rake set_bucket
+```
+
+And for maps:
+
+```
+rake map_bucket
+```
 
 ## Other commands
 
-See all available commands:
-
-    $ rake -T
+See all available commands by running `rake -T` or just `rake` by
+itself.
 
 ## Note
 
-Depending on your erlang cookie, you may have to use the commands with `sudo`.
+Depending on your Erlang cookie, you may have to use the commands with
+`sudo`.
 
 ## Authors
 
@@ -60,4 +111,8 @@ Depending on your erlang cookie, you may have to use the commands with `sudo`.
 * [Sebastian Röbke](https://github.com/boosty)
 
 Updates by:
+
 * [Simon Vans-Colina](https://github.com/simonvc)
+* [Seth Thomas](https://github.com/cheeseplus)
+* [Joel Jacobson](https://github.com/joeljacobson)
+* [Tyler Hannan](https://github.com/tylerhannan)
